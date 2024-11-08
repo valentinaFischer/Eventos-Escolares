@@ -27,9 +27,11 @@ app.use(express.static('public'));
 // Routes
 import UserRoutes from './src/routes/UserRoutes.js';
 import AdminRoutes from './src/routes/AdminRoutes.js';
+import RegistrationRoutes from './src/routes/RegistrationRoutes.js'
 
 app.use('/users', UserRoutes);
 app.use('/admin', AdminRoutes);
+app.use('/events/registration', RegistrationRoutes);
 
 // Start server
 async function startServer() {
