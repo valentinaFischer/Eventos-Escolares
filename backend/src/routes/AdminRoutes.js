@@ -15,6 +15,8 @@ router.get('/users', verifyToken, verifyAdmin, AdminController.getAllUsers); //A
 
 // Eventos
 router.post('/createEvent', verifyToken, verifyAdmin, AdminController.createEvent);
+router.patch('/editEvent/:id', verifyToken, verifyAdmin, AdminController.editEvent);
+router.delete('/deleteEvent/:id', verifyToken, verifyAdmin, AdminController.deleteEvent);
 
 // Inscricoes
 router.get('/event/registrations/:id', verifyToken, verifyAdmin, RegistrationController.getRegistrationsByEventId);
