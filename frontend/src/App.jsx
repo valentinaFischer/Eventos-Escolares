@@ -26,7 +26,7 @@ function App() {
             <Route path='/login' element={<Login />}/>
             <Route path='/signin' element={<Signin />}/>
             <Route element={<MainLayout />} >
-              <Route path='/' errorElement={<div> <p> not found</p></div>} element={<LandingPage />}/>
+              <Route path='/' element={<LandingPage />}/>
               <Route path='/home' element={<Home />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/events' element={<Events />} />
