@@ -10,6 +10,7 @@ import createUserToken from '../helpers/create-user-token.js';
 import getToken from '../helpers/get-token.js';
 import getUserByToken from '../helpers/get-user-by-token.js';
 import updateUserToken from '../helpers/update-user-token.js';
+import Registration from '../models/Registration.js';
 
 export default class UserController {
 
@@ -135,6 +136,7 @@ export default class UserController {
 
     static async checkUser(req, res) {
         let currentUser;
+        let registrations;
 
         if(req.headers.authorization) {
             const token = getToken(req);
@@ -143,11 +145,21 @@ export default class UserController {
             currentUser = await User.findByPk(decoded.id);
             currentUser.senha = undefined;
 
+            registrations = await Registration.findAll({
+                where: {
+                    user_id: currentUser.id
+                }, 
+                include: [Event]
+            })
+            
         } else {
             currentUser = null;
         }
 
-        return res.status(200).send(currentUser);
+        return res.status(200).send({ 
+            ...currentUser.dataValues,
+            registrations
+        });
     }
 
     static async editUser(req, res) {

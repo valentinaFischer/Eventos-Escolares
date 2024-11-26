@@ -1,5 +1,7 @@
 import User from '../models/User.js';
 import Event from '../models/Event.js';
+import Registration from '../models/Registration.js';
+
 import { Op } from 'sequelize';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
@@ -16,14 +18,23 @@ export default class AdminController {
         const id = req.params.id;
 
         const user = await User.findByPk(id, {
-            attributes: { exclude: ['senha'] }
+            attributes: { exclude: ['senha'] },
         });
+        const registrations = await Registration.findAll({
+            where: {
+                user_id: id
+            },
+            include: [Event] 
+        })
 
         if(!user) {
             res.status(422).json({ message: "Usuário não encontrado." });
             return;
         }
-        res.status(200).json({user});
+        res.status(200).json({
+            user, 
+            registrations: registrations.length == 0? undefined : registrations
+        });
     }
 
     static async getAllUsers(req, res) {

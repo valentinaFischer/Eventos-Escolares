@@ -10,6 +10,8 @@ import Events from './pages/Events'
 import EventDetails from './pages/EventDetails'
 import LandingPage from './pages/LandingPage'
 import UserList from './pages/UserList'
+import CreateEvent from './pages/CreateEvent'
+import NotFoundPage from './pages/NotFoundPage'
 
 import AdminRoute from './components/layoutRoutes/AdminRoute'
 import MainLayout from './components/layoutRoutes/MainLayout'
@@ -23,9 +25,8 @@ function App() {
           <Routes>
             <Route path='/login' element={<Login />}/>
             <Route path='/signin' element={<Signin />}/>
-
             <Route element={<MainLayout />} >
-              <Route path='/' element={<LandingPage />}/>
+              <Route path='/' errorElement={<div> <p> not found</p></div>} element={<LandingPage />}/>
               <Route path='/home' element={<Home />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/events' element={<Events />} />
@@ -34,9 +35,12 @@ function App() {
               <Route element={<AdminRoute />}>
                 <Route path='/users' element={<UserList />}/>
                 <Route path='/profile/:id' element={<Profile />}/>
+                <Route path='/event/create' element={<CreateEvent />}/>
               </Route>
 
             </Route>
+
+            <Route path='/*' element={<NotFoundPage/>}/>
           </Routes>
         </SessionProvider>
       </BrowserRouter>

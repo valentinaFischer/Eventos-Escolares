@@ -19,6 +19,7 @@ router.patch('/editEvent/:id', verifyToken, verifyAdmin, AdminController.editEve
 router.delete('/deleteEvent/:id', verifyToken, verifyAdmin, AdminController.deleteEvent);
 
 // Inscricoes
+router.put('/event/registration/:id', verifyToken, verifyAdmin, RegistrationController.changeRegistrationStatus);
 router.get('/event/registrations/:id', verifyToken, verifyAdmin, RegistrationController.getRegistrationsByEventId);
 
 export default router;
