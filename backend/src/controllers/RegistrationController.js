@@ -79,11 +79,17 @@ export default class RegistrationController {
       })
       if(!registration) return res.status(200).send({message: "Usuário não inscrito para o evento"});
       
-      if(registration.status_pagamento == "nao_pago"){
+      if(event.tipo == 'nao_pago' || (event.tipo == 'pago' && registration.status_pagamento == "nao_pago")){
          await registration.destroy();
-         return res.send(200).send({message: "Inscrição cancelada com sucesso!"})
+         return res.send(200).send({
+            "inscricao_cancelada": true,
+            "message": "Inscrição cancelada com sucesso."
+         })
       }
-      return res.send(200).send("Reembolso não implementado");
+      return res.send(200).send({
+         "inscricao_cancelada": false,
+         "message": "Enviar mensagem a um admin para cancelar a inscrição e devolver o dinheiro.",
+      });
    }
 
    static async newRegistration(req, res){
@@ -97,9 +103,7 @@ export default class RegistrationController {
       if((event.publico_alvo == "alunos_curso_especifico" && (user.curso == null || user.matricula == null) ) || (event.publico_alvo == "somente_alunos" && user.matricula == null))
          return res.status(403).send("Não autorizado a se inscrever neste evento");
       
-      //let initialStatus = user.matricula == null? 'antesDSeraceito' : 'nao_pago'; 
-      let initialStatus = "nao_pago";
-
+      let initialStatus = event.tipo == 'pago'? 'nao_pago' : 'pago';
       let [registration, created] = await Registration.findOrCreate({
          where: {
             event_id: event.id,
@@ -110,16 +114,11 @@ export default class RegistrationController {
          }
       })
       let resBody = {
-         message: created? "Inscrição feita com sucesso!" : "Inscrição feita previamente",
+         message: created? "Inscrição feita com sucesso." : "Inscrição feita previamente",
          registration_status: registration.status_pagamento, 
       }
       return res.status(200).send(resBody);
    }
-
-
-   // Payment handlers
-   // eo pix nada ainda?
-
 
     // Admin control
 
