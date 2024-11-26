@@ -26,7 +26,7 @@ Para inicializar o servidor:
    cd backend
    node ./index.js
 ```
-ou com nodemon:
+ou em modo de desenvolvimento:
 ```bash
    cd backend
    npm start
