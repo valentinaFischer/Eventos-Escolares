@@ -12,9 +12,7 @@ export default function Login() {
     if (username === '' || password === '') {
       setErrorMessage('Por favor, preencha todos os campos.')
     } else {
-   
-      console.log('Login realizado com:', username, password)
-      // Redirecionar ou mostrar mensagem de sucesso
+      
     }
   }
 
