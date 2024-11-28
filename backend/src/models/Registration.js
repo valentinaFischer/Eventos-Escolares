@@ -26,7 +26,7 @@ const Registration = sequelize.define('Registration', {
     allowNull: false,
   },
   status_pagamento: {
-    type: DataTypes.ENUM('pago', 'pendente', 'nao_pago'),
+    type: DataTypes.ENUM('pago', 'nao_pago'),
     allowNull: false,
   },
 });

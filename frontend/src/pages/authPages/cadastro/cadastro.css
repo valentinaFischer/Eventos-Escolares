@@ -1,0 +1,116 @@
+/* Estilos gerais */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: #e6f0ff; /* Fundo suave */
+}
+
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #e6f0ff; /* Fundo suave */
+  margin: 0; /* Remove qualquer margem extra */
+}
+
+/* Ajustando a navbar */
+.navbar {
+  position: absolute; /* Para que o menu não afete o layout geral */
+  top: 20px;
+  left: 20px;
+  background-color: #1e3a8a; /* Azul */
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 10; /* Garante que o menu fique acima de outros elementos */
+}
+
+.navbar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  display: inline;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #ffcc00; /* Amarelo */
+  font-size: 16px;
+}
+
+.navbar-link:hover {
+  color: #ffffff; /* Branco ao passar o mouse */
+}
+
+/* Caixa do formulário */
+.signin-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  margin: 0; /* Remove qualquer margem extra */
+}
+
+.signin-box h2 {
+  color: #1e3a8a; /* Azul */
+  margin-bottom: 20px;
+}
+
+/* Remove a faixa extra */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #1e3a8a; /* Azul quando em foco */
+}
+
+.btn-signup {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e3a8a; /* Azul */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-signup:hover {
+  background-color: #ffcc00; /* Amarelo no hover */
+  color: #1e3a8a; /* Azul no texto */
+}
+
+.login-link {
+  margin-top: 15px;
+}
+
+.login-link p {
+  font-size: 14px;
+}
+
+.login-link-text {
+  color: #1e3a8a;
+  text-decoration: none;
+}
+
+.login-link-text:hover {
+  color: #ffcc00; /* Amarelo ao passar o mouse */
+}
