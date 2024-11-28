@@ -72,7 +72,7 @@ export default function Signin() {
         </form>
 
         <div className="login-link">
-          <p><Link to="/login" className="login-link-text">Já tem uma conta? </Link></p>
+          <p><Link to="/login" replace className="login-link-text">Já tem uma conta? </Link></p>
         </div>
       </div>
     </div>
