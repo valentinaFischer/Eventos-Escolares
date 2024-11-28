@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 
-import Login from './pages/authPages/Login'
-import Signin from './pages/authPages/Signin'
+import Login from './pages/authPages/login/Login'
+import Signin from './pages/authPages/cadastro/Signin'
 
 import Home from './pages/Home'
 import Profile from './pages/Profile'

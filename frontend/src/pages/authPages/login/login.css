@@ -1,0 +1,124 @@
+/* login.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #e6f0ff; /* Cor de fundo suave */
+}
+
+.navbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #1e3a8a; /* Azul */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.navbar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  display: inline;
+  margin-right: 10px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #ffcc00; /* Amarelo */
+  font-size: 16px;
+}
+
+.navbar-link:hover {
+  color: #ffffff; /* Branco ao passar o mouse */
+}
+
+/* Formulário de Login */
+.login-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+.login-box h2 {
+  color: #1e3a8a; /* Azul */
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #1e3a8a; /* Azul quando em foco */
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e3a8a; /* Azul */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  background-color: #ffcc00; /* Amarelo no hover */
+  color: #1e3a8a; /* Azul no texto */
+}
+
+/* Link de cadastro abaixo do botão de login */
+.signup-link {
+  margin-top: 15px;
+}
+
+.signup-link p {
+  font-size: 14px;
+}
+
+.signup-link-text {
+  color: #1e3a8a;
+  text-decoration: none;
+}
+
+.signup-link-text:hover {
+  color: #ffcc00; /* Amarelo ao passar o mouse */
+}
