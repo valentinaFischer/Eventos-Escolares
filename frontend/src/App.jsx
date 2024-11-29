@@ -30,12 +30,12 @@ function App() {
               <Route path='/home' element={<Home />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/events' element={<Events />} />
-              <Route path='/event/:id' element={<EventDetails />} />
+              <Route path='/events/:id' element={<EventDetails />} />
 
               <Route element={<AdminRoute />}>
                 <Route path='/users' element={<UserList />}/>
                 <Route path='/profile/:id' element={<Profile />}/>
-                <Route path='/event/create' element={<CreateEvent />}/>
+                <Route path='/events/create' element={<CreateEvent />}/>
               </Route>
 
             </Route>
