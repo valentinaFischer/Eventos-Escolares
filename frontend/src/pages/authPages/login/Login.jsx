@@ -26,30 +26,36 @@ export default function Login() {
       senha,
     };
 
-    let res = await api.post("/users/login", data);
-     /*  
-      res.data = {
-        "message": "Você está logado(a)",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiZXJuZXN0byIsImlkIjo1LCJ0aXBvX3VzdWFyaW8iOiJhZG1pbiIsIm1hdHJpY3VsYSI6bnVsbCwiY3Vyc28iOm51bGwsImVtYWlsIjoiaW5mbzJAaG90bWFpbC5jb20iLCJpYXQiOjE3MzI4MzkyMDR9.-2TwMM0CdA8YhadZCzUc13351DBqeKOnByC9YeBRi18",
-        "user": {
-          "nome": "ernesto",
-          "id": 5,
-          "tipo_usuario": "admin",
-          "matricula": null,
-          "curso": null,
-          "email": "info2@hotmail.com"
-        }
+    let res;
+    /*  
+     res.data = {
+       "message": "Você está logado(a)",
+       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiZXJuZXN0byIsImlkIjo1LCJ0aXBvX3VzdWFyaW8iOiJhZG1pbiIsIm1hdHJpY3VsYSI6bnVsbCwiY3Vyc28iOm51bGwsImVtYWlsIjoiaW5mbzJAaG90bWFpbC5jb20iLCJpYXQiOjE3MzI4MzkyMDR9.-2TwMM0CdA8YhadZCzUc13351DBqeKOnByC9YeBRi18",
+       "user": {
+         "nome": "ernesto",
+         "id": 5,
+         "tipo_usuario": "admin",
+         "matricula": null,
+         "curso": null,
+         "email": "info2@hotmail.com"
+       }
+     }
+
+     */
+    try { 
+      res = await api.post("/users/login", data);
+      if (res && res.status == 200) {
+        return await login({
+          info: res.data.user,
+          token: res.data.token,
+        });
+      } 
+    } catch(err){
+      if(err.status == 422){
+        return setErrorMessage("Senha incorreta")
       }
-
-      */
-
-    if (res && res.status == 200) {
-      return await login({
-        info: res.data.user,
-        token: res.data.token,
-      });
-    } 
-    return setErrorMessage("Erro ao fazer login, cheque suas credenciais")
+      return setErrorMessage("Erro ao fazer login, cheque suas credenciais")
+    }
   }
 
   return (
