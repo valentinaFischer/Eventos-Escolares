@@ -28,7 +28,7 @@ export default function MainLayout() {
             Eventos
           </Link>
           <Link
-            to="/"
+            to="/registrations"
             className="text-sm font-medium text-gray-600 hover:text-gray-900"
           >
             Inscrições
@@ -86,6 +86,12 @@ export default function MainLayout() {
                   className="text-gray-300 hover:text-white transition"
                 >
                   Eventos
+                </Link>
+                <Link
+                  to="/registrations"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  Inscrições
                 </Link>
                 <Link
                   to="/profile"

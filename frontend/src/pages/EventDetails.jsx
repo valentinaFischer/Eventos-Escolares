@@ -8,26 +8,61 @@ export default function EventDetails() {
   const { id } = useParams();
   const { user } = useSession();
   const [evento, setEvento] = useState(null);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    (async () => {
-      try {
-        let res = await api.get(`/users/eventos/${id}`, {
+    fetchEventDetails();
+  }, []);
+
+  const fetchEventDetails = async () => {
+    try {
+      let res = await api.get(`/users/eventos/${id}`, {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      });
+
+      if (res.status === 200) {
+        setEvento(res.data);
+        setIsRegistered(
+          res.data.Registrations.some((reg) => reg.user_id === user.info.id)
+        );
+      } else {
+        navigate("/events");
+      }
+    } catch (err) {
+      console.error(err);
+      navigate("/events");
+    }
+  };
+
+  const handleRegistration = async () => {
+    if (isRegistered) return;
+
+    setIsRegistering(true);
+    try {
+      const res = await api.put(
+        `/events/registration/${id}`,
+        {},
+        {
           headers: {
             Authorization: "Bearer " + user.token,
           },
-        });
+        }
+      );
 
-        if (res.status == 200) {
-          console.log(res.data);
-          return setEvento(res.data);
-        } else return navigate("/events");
-      } catch (err) {
-        return navigate("/events");
+      if (res.status === 200) {
+        setIsRegistered(true);
+        await fetchEventDetails(); // Refresh event details to update registrations
       }
-    })();
-  }, []);
+    } catch (err) {
+      console.error("Registration failed:", err);
+    } finally {
+      setIsRegistering(false);
+    }
+  };
 
   if (evento == null) {
     return (
@@ -101,8 +136,20 @@ export default function EventDetails() {
           </div>
 
           <div className="mt-auto">
-            <button className="bg-blue-600 w-full text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors">
-              Inscreva-se já!
+            <button
+              className={`w-full px-8 py-3 rounded-full text-lg font-semibold transition-colors ${
+                isRegistered
+                  ? "bg-green-600 text-white cursor-not-allowed"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+              onClick={handleRegistration}
+              disabled={isRegistered || isRegistering}
+            >
+              {isRegistering
+                ? "Processando..."
+                : isRegistered
+                ? "Inscrito no evento"
+                : "Inscreva-se já!"}
             </button>
           </div>
         </div>

@@ -355,7 +355,8 @@ export default class UserController {
             // Buscar os eventos com base na condição filtrada
             const eventos = await Event.findAll({
                 where: whereCondition,
-                order: [['data_horario', 'ASC']]  // Ordenar por data
+                order: [['data_horario', 'ASC']],  // Ordenar por data
+                include: [Registration]
             });
     
             if (eventos.length === 0) {
@@ -381,7 +382,9 @@ export default class UserController {
         const userCourse = currentUser.curso;
 
         const evento = await Event.findByPk(eventId, {
-            include: userType != 'admin'? undefined : {
+            include: userType != 'admin'? {
+                model: Registration,
+            } : {
                 model: Registration,
                 include: [User]
             }

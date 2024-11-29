@@ -16,6 +16,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import AdminRoute from './components/layoutRoutes/AdminRoute'
 import MainLayout from './components/layoutRoutes/MainLayout'
 import { SessionProvider } from './hooks/useSession'
+import Registrations from './pages/Registrations'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path='/' element={<LandingPage />}/>
               <Route path='/home' element={<Home />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/registrations' element={<Registrations />}/>
               <Route path='/events' element={<Events />} />
               <Route path='/events/:id' element={<EventDetails />} />
 
