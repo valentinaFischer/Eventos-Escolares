@@ -1,11 +1,20 @@
 import User from '../models/User.js';
 import Event from '../models/Event.js';
 import Registration from '../models/Registration.js';
-
+import { v2 as cloudinary } from 'cloudinary';
 import { Op } from 'sequelize';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { config } from 'dotenv'; config();
+
+const CLOUDINARY_SECRET = process.env.CLOUDINARY_SECRET;
+// cloudinary config
+cloudinary.config({ 
+    cloud_name: 'de8lyxv0y', 
+    api_key: '178831842197867', 
+    api_secret: CLOUDINARY_SECRET
+});
 
 //helpers
 import createUserToken from '../helpers/create-user-token.js';
@@ -48,8 +57,10 @@ export default class AdminController {
     }
 
     static async createEvent(req, res) {
-        const { nome, descricao, data_horario, localizacao, tipo_evento, publico_alvo } = req.body;
-
+        const { nome, descricao, data_horario, localizacao, tipo_evento, publico_alvo } = req.body;    
+        let caminho_imagem;
+        const file = req.file;
+        console.log(file);
         let curso_necessario = null;
         if (publico_alvo === "alunos_curso_especifico") {
             curso_necessario = req.body.curso_necessario;
@@ -57,11 +68,22 @@ export default class AdminController {
                 return res.status(422).json({ message: "O curso é obrigatório quando o público alvo é 'alunos de um curso específico'." });
             }
         }
-
+        const uploadResult = await cloudinary.uploader
+          .upload(
+              '/public/'+file.filename, {
+                  public_id: file.filename,
+              }
+          )
+          .catch((error) => {
+              console.log(error);
+          });
+          caminho_imagem = uploadResult.url;
+          console.log(uploadResult)
+        
         // Images upload
 
         // Validations
-        if(!nome || !descricao || !data_horario || !localizacao || !tipo_evento || !publico_alvo) {
+        if(!nome || !descricao || !data_horario || !localizacao || !tipo_evento || !publico_alvo || !file) {
             res.status(422).json({ message: "Todos os campos são obrigatórios." });
             return;
         }
@@ -75,7 +97,8 @@ export default class AdminController {
                 localizacao,
                 tipo_evento,
                 publico_alvo,
-                curso_necessario
+                curso_necessario,
+                caminho_imagem
             };
     
             if (tipo_evento === "alunos_curso_especifico") {
@@ -162,7 +185,7 @@ export default class AdminController {
                     localizacao: event.localizacao,
                     tipo_evento: event.tipo_evento,
                     publico_alvo: event.publico_alvo,
-                    curso_necessario: event.curso_necessario
+                    curso_necessario: event.curso_necessario,
                 },
                 {
                     where: { id: id }

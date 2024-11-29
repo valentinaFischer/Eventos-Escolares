@@ -89,7 +89,7 @@ export default function EventDetails() {
       <div className="w-full flex flex-col md:flex-row mb-8">
         <div className="relative w-full md:w-1/2 md:pr-5">
           <img
-            src={"http://localhost:5000/" + evento.caminho_imagem}
+            src={evento.caminho_imagem}
             alt={"Imagem do evento: " + evento.nome}
             className="w-full aspect-[16/9] bg-black object-cover rounded-lg"
           />
