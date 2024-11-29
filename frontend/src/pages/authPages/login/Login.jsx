@@ -12,9 +12,7 @@ export default function Login() {
     if (username === '' || password === '') {
       setErrorMessage('Por favor, preencha todos os campos.')
     } else {
-   
-      console.log('Login realizado com:', username, password)
-      // Redirecionar ou mostrar mensagem de sucesso
+      let res = await 
     }
   }
 
@@ -50,7 +48,7 @@ export default function Login() {
 
         {/* Link de cadastro abaixo do botão de login */}
         <div className="signup-link">
-          <p> <Link to="/signin" className="signup-link-text">Não tem uma conta?</Link></p>
+          <p> <Link to="/signin" replace className="signup-link-text">Não tem uma conta?</Link></p>
         </div>
       </div>
     </div>
