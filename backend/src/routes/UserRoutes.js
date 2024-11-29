@@ -13,6 +13,7 @@ router.post('/login', UserController.login);
 //Ler
 router.get('/me', verifyToken, UserController.checkUser);
 router.get('/eventos', verifyToken, UserController.getEventosByUserType);
+router.get('/eventos/:id', verifyToken, UserController.getEventoById);
 
 //Editar
 router.patch('/edit/:id', verifyToken, UserController.editUser);
