@@ -380,8 +380,12 @@ export default class UserController {
         const userType = currentUser.tipo_usuario; 
         const userCourse = currentUser.curso;
 
-        const evento = await Event.findByPk(eventId);
-
+        const evento = await Event.findByPk(eventId, {
+            include: userType != 'admin'? undefined : {
+                model: Registration,
+                include: [User]
+            }
+        });
         if (!evento) {
             return res.status(404).send({ "message": "Evento não existe" });
         }
@@ -395,7 +399,8 @@ export default class UserController {
                 return res.status(403).send({ "message": "Curso necessário não corresponde" });
             }
         }
-        return res.status(200).json(evento.dataValues);
+       
+        return res.status(200).json(evento);
         
     }
 }
