@@ -42,19 +42,19 @@ export default function Login() {
      }
 
      */
-    try { 
+    try {
       res = await api.post("/users/login", data);
       if (res && res.status == 200) {
         return await login({
           info: res.data.user,
           token: res.data.token,
         });
-      } 
-    } catch(err){
-      if(err.status == 422){
-        return setErrorMessage("Senha incorreta")
       }
-      return setErrorMessage("Erro ao fazer login, cheque suas credenciais")
+    } catch (err) {
+      if (err.status == 422) {
+        return setErrorMessage("Senha incorreta");
+      }
+      return setErrorMessage("Erro ao fazer login, cheque suas credenciais");
     }
   }
 

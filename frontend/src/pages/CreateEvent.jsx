@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useSession } from "../hooks/useSession";
 import api from "../api/api";
+import { useNavigate } from "react-router";
 
 export default function CreateEvent() {
   const { user } = useSession();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nome: "",
     descricao: "",
@@ -49,7 +51,7 @@ export default function CreateEvent() {
     if (image) {
       submitData.append("event_image", image);
     } else {
-      alert("É necessário inserir uma imagem");
+      return alert("É necessário inserir uma imagem");
     }
 
     try {
@@ -61,6 +63,7 @@ export default function CreateEvent() {
       });
       if (response.status === 201 || response.status === 200) {
         alert("Evento criado com sucesso!");
+        return navigate('/events');
         // Reset form or redirect
       }
     } catch (error) {
@@ -198,7 +201,7 @@ export default function CreateEvent() {
         </div>
 
          {
-            formData.publico_alvo != 'todos' &&        <div>
+            formData.publico_alvo == 'alunos_curso_especifico' &&        <div>
             <label
               htmlFor="curso_necessario"
               className="block text-sm font-medium text-gray-700"

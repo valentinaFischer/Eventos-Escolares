@@ -1,105 +1,77 @@
-/* Estilos gerais */
-body, html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  background-color: #e6f0ff; /* Fundo suave */
-}
-
 .signin-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #e6f0ff; /* Fundo suave */
-  margin: 0; /* Remove qualquer margem extra */
+  background-color: #6c8ccc49; 
 }
 
-/* Ajustando a navbar */
-.navbar {
-  position: absolute; /* Para que o menu não afete o layout geral */
-  top: 20px;
-  left: 20px;
-  background-color: #1e3a8a; /* Azul */
-  padding: 10px;
-  border-radius: 5px;
-  z-index: 10; /* Garante que o menu fique acima de outros elementos */
-}
-
-.navbar-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-item {
-  display: inline;
-}
-
-.navbar-link {
-  text-decoration: none;
-  color: #ffcc00; /* Amarelo */
-  font-size: 16px;
-}
-
-.navbar-link:hover {
-  color: #ffffff; /* Branco ao passar o mouse */
-}
-
-/* Caixa do formulário */
 .signin-box {
-  background-color: white;
-  padding: 30px;
+  background-color: #ffffff;
+  padding: 24px;
+  padding-left: 40px;
+  padding-right: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
   text-align: center;
-  margin: 0; /* Remove qualquer margem extra */
+  transition: transform 0.3s ease-in-out;
 }
 
 .signin-box h2 {
-  color: #1e3a8a; /* Azul */
+  color: #0E0D5A; 
+  font-size: 2rem;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
-/* Remove a faixa extra */
 .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   text-align: left;
 }
 
-.input-group input {
+.input-group label {
+  color: #1e3a8a; 
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input-group input, .input-group select {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-group input:focus {
+  border-color: #22509E; 
+  box-shadow: 0 0 10px rgba(34, 80, 158, 0.5);
   outline: none;
-  border-color: #1e3a8a; /* Azul quando em foco */
 }
 
 .btn-signup {
   width: 100%;
-  padding: 10px;
-  background-color: #1e3a8a; /* Azul */
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 14px;
+  background-color: #1e3a8a; 
+  color: #fff;
   font-size: 16px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
 .btn-signup:hover {
-  background-color: #ffcc00; /* Amarelo no hover */
-  color: #1e3a8a; /* Azul no texto */
+  background-color: #1F1D7B; 
 }
 
 .login-link {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .login-link p {
@@ -107,10 +79,31 @@ body, html {
 }
 
 .login-link-text {
-  color: #1e3a8a;
+  color: #22509E; 
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .login-link-text:hover {
-  color: #ffcc00; /* Amarelo ao passar o mouse */
+  color: #1F1D7B; 
+}
+
+@media (max-width: 600px) {
+  .signin-box {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .signin-box h2 {
+    font-size: 1.5rem;
+  }
+
+  .input-group input {
+    font-size: 14px;
+  }
+
+  .btn-signup {
+    padding: 12px;
+  }
 }

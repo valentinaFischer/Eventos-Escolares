@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../api/api";
 import { useSession } from "../hooks/useSession";
 import { Link } from "react-router";
-import { Plus } from 'lucide-react'
+import { Plus } from "lucide-react";
 
 export default function Events() {
   const [eventos, setEventos] = useState(null);
@@ -36,6 +36,10 @@ export default function Events() {
       return setEventos(false);
     } catch (err) {
       console.error(err.status);
+      if (err.status == 404) {
+        return setEventos([]);
+      }
+      return setEventos(false);
     }
   }
 
@@ -62,6 +66,14 @@ export default function Events() {
   if (eventos.length <= 0) {
     return (
       <div className="flex justify-center items-center h-screen">
+        {user.info.tipo_usuario == "admin" && (
+          <Link
+            to={"/events/create"}
+            className="z-30 fixed bottom-14 right-14 p-4 hover:bg-blue-500 bg-blue-700 rounded-xl"
+          >
+            <Plus color="white" size={38} />
+          </Link>
+        )}
         <p className="text-xl font-semibold text-gray-600">
           Nenhum evento encontrado
         </p>
@@ -74,14 +86,17 @@ export default function Events() {
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
         Lista de Eventos
       </h2>
-      { 
-        user.info.tipo_usuario == 'admin' && <Link to={'/events/create'} className="z-30 fixed bottom-14 right-14 p-4 hover:bg-blue-500 bg-blue-700 rounded-xl">
+      {user.info.tipo_usuario == "admin" && (
+        <Link
+          to={"/events/create"}
+          className="z-30 fixed bottom-14 right-14 p-4 hover:bg-blue-500 bg-blue-700 rounded-xl"
+        >
           <Plus color="white" size={38} />
         </Link>
-      }
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {eventos.map((evento) => (
-          <Link to={"/events/"+evento.id}>
+          <Link to={"/events/" + evento.id}>
             <div
               key={evento.id}
               className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
