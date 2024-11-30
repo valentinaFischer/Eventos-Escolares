@@ -1,5 +1,6 @@
 import React from "react";
 import './Home.css'
+import { Link } from "react-router";
 
 export default function Home() {
    return (
@@ -10,9 +11,9 @@ export default function Home() {
                <p>
                   Informações, valores e dicas sobre os eventos somente aqui!
                </p>
-               <div className="hero-buttons">
+               <Link to='/' className="hero-buttons">
                   <button className="primary-btn">Saber mais</button>
-               </div>
+               </Link>
             </div>
          </section>
 
