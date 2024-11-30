@@ -11,7 +11,9 @@ const SessionProvider = ({ children }) => {
   // call this function when you want to authenticate the user
   const login = async (data) => {
     setUser(data);
-    navigate("/profile");
+    navigate("/profile", {
+      replace: true
+    });
   };
 
   // call this function to sign out logged in user

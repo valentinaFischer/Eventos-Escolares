@@ -355,7 +355,8 @@ export default class UserController {
             // Buscar os eventos com base na condição filtrada
             const eventos = await Event.findAll({
                 where: whereCondition,
-                order: [['data_horario', 'ASC']]  // Ordenar por data
+                order: [['data_horario', 'ASC']],  // Ordenar por data
+                include: [Registration]
             });
     
             if (eventos.length === 0) {
@@ -367,5 +368,42 @@ export default class UserController {
             console.error("Erro ao buscar eventos:", error);
             return res.status(500).json({ message: "Erro ao buscar eventos." });
         }
+    }
+
+    static async getEventoById(req, res){
+        const params = req.params;
+        const eventId = params.id;
+
+        const token = getToken(req);
+        const decoded = jwt.verify(token, 'nossosecret');
+        const currentUser = await User.findByPk(decoded.id);
+        // Get user data
+        const userType = currentUser.tipo_usuario; 
+        const userCourse = currentUser.curso;
+
+        const evento = await Event.findByPk(eventId, {
+            include: userType != 'admin'? {
+                model: Registration,
+            } : {
+                model: Registration,
+                include: [User]
+            }
+        });
+        if (!evento) {
+            return res.status(404).send({ "message": "Evento não existe" });
+        }
+        
+        if (userType != 'admin') {
+            if (userType == 'visitante' && evento.publico_alvo != 'todos') {
+                return res.status(403).send({ "message": "Acesso negado para visitantes" });
+            }
+        
+            if (evento.publico_alvo == 'alunos_curso_especifico' && userCourse != evento.curso_necessario) {
+                return res.status(403).send({ "message": "Curso necessário não corresponde" });
+            }
+        }
+       
+        return res.status(200).json(evento);
+        
     }
 }

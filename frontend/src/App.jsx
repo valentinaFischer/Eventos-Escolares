@@ -4,11 +4,11 @@ import './App.css'
 import Login from './pages/authPages/login/Login'
 import Signin from './pages/authPages/cadastro/Signin'
 
-import Home from './pages/Home'
-import Profile from './pages/Profile'
+import Home from './pages/home/Home'
+import Profile from './pages/profile/Profile'
 import Events from './pages/Events'
 import EventDetails from './pages/EventDetails'
-import LandingPage from './pages/LandingPage'
+import LandingPage from './pages/landingPage/LandingPage'
 import UserList from './pages/UserList'
 import CreateEvent from './pages/CreateEvent'
 import NotFoundPage from './pages/NotFoundPage'
@@ -16,6 +16,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import AdminRoute from './components/layoutRoutes/AdminRoute'
 import MainLayout from './components/layoutRoutes/MainLayout'
 import { SessionProvider } from './hooks/useSession'
+import Registrations from './pages/Registrations'
 
 function App() {
   return (
@@ -29,13 +30,14 @@ function App() {
               <Route path='/' element={<LandingPage />}/>
               <Route path='/home' element={<Home />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/registrations' element={<Registrations />}/>
               <Route path='/events' element={<Events />} />
-              <Route path='/event/:id' element={<EventDetails />} />
+              <Route path='/events/:id' element={<EventDetails />} />
 
               <Route element={<AdminRoute />}>
                 <Route path='/users' element={<UserList />}/>
                 <Route path='/profile/:id' element={<Profile />}/>
-                <Route path='/event/create' element={<CreateEvent />}/>
+                <Route path='/events/create' element={<CreateEvent />}/>
               </Route>
 
             </Route>

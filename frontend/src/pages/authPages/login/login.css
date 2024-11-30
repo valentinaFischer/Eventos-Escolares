@@ -1,113 +1,81 @@
-/* login.css */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
-
 .login-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #e6f0ff; /* Cor de fundo suave */
+  background-color: #6c8ccc49; 
 }
 
-.navbar {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: #1e3a8a; /* Azul */
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.navbar-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-item {
-  display: inline;
-  margin-right: 10px;
-}
-
-.navbar-link {
-  text-decoration: none;
-  color: #ffcc00; /* Amarelo */
-  font-size: 16px;
-}
-
-.navbar-link:hover {
-  color: #ffffff; /* Branco ao passar o mouse */
-}
-
-/* Formulário de Login */
 .login-box {
-  background-color: white;
-  padding: 30px;
+  background-color: #ffffff;
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
   text-align: center;
+  transition: transform 0.3s ease-in-out;
 }
 
 .login-box h2 {
-  color: #1e3a8a; /* Azul */
+  color: #0E0D5A; 
+  font-size: 2rem;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
 .input-group label {
-  display: block;
-  color: #333;
-  margin-bottom: 5px;
+  color: #1F1D7B; 
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .input-group input {
   width: 100%;
-  padding: 10px;
+  padding: 12px 16px;
   font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-group input:focus {
+  border-color: #22509E; 
+  box-shadow: 0 0 10px rgba(34, 80, 158, 0.5);
   outline: none;
-  border-color: #1e3a8a; /* Azul quando em foco */
 }
 
 .error-message {
-  color: red;
+  color: #ff4d4d;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .btn-login {
   width: 100%;
-  padding: 10px;
-  background-color: #1e3a8a; /* Azul */
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 14px;
+  background-color: #22509E; 
+  color: #fff;
   font-size: 16px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
 .btn-login:hover {
-  background-color: #ffcc00; /* Amarelo no hover */
-  color: #1e3a8a; /* Azul no texto */
+  background-color: #1F1D7B; 
 }
 
-/* Link de cadastro abaixo do botão de login */
 .signup-link {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .signup-link p {
@@ -115,10 +83,31 @@ body {
 }
 
 .signup-link-text {
-  color: #1e3a8a;
+  color: #22509E;
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .signup-link-text:hover {
-  color: #ffcc00; /* Amarelo ao passar o mouse */
+  color: #1F1D7B; 
+}
+
+@media (max-width: 600px) {
+  .login-box {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .login-box h2 {
+    font-size: 1.5rem;
+  }
+
+  .input-group input {
+    font-size: 14px;
+  }
+
+  .btn-login {
+    padding: 12px;
+  }
 }

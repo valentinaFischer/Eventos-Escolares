@@ -1,8 +1,12 @@
 import React from "react";
 import { Link, Outlet, useNavigate, useNavigation } from "react-router";
 import { Search } from "lucide-react";
+import { useSession } from "../../hooks/useSession";
 
 export default function MainLayout() {
+
+  const { user, logout } = useSession();
+
   return (
     <>
       <header className="flex h-16 items-center justify-between border-b bg-white px-6 shadow-sm">
@@ -24,7 +28,7 @@ export default function MainLayout() {
             Eventos
           </Link>
           <Link
-            to="/"
+            to="/registrations"
             className="text-sm font-medium text-gray-600 hover:text-gray-900"
           >
             Inscrições
@@ -47,9 +51,14 @@ export default function MainLayout() {
           </button>
           <Link
             to="/login"
+            onClick={() => {
+              if(user){
+                logout();
+              }
+            }}
             className="inline-block ml-4 px-5 py-2 font-medium rounded-lg bg-blue-600 text-white"
           >
-            Entrar
+            {user? 'Logout' : 'Entrar'}
           </Link>
         </div>
       </header>
@@ -77,6 +86,12 @@ export default function MainLayout() {
                   className="text-gray-300 hover:text-white transition"
                 >
                   Eventos
+                </Link>
+                <Link
+                  to="/registrations"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  Inscrições
                 </Link>
                 <Link
                   to="/profile"
